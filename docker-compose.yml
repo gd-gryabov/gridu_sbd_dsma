@@ -1,0 +1,18 @@
+version: '3'
+services:
+
+  config-server:
+    container_name: config-server
+    build: ./config-server
+    ports:
+      - "8888:8888"
+      - "18787:8787"
+
+  service-registry:
+    container_name: service-registry
+    build: ./service-registry
+    ports:
+      - "8761:8761"
+      - "28787:8787"
+    depends_on:
+      - config-server
