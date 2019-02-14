@@ -1,7 +1,7 @@
-package gridu.dsma.inventoryservice.controllers;
+package gridu.dsma.inventoryservice.controller;
 
-import gridu.dsma.inventoryservice.entities.InventoryItem;
-import gridu.dsma.inventoryservice.repositories.InventoryItemRepository;
+import gridu.dsma.inventoryservice.entity.InventoryItem;
+import gridu.dsma.inventoryservice.repository.InventoryItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;

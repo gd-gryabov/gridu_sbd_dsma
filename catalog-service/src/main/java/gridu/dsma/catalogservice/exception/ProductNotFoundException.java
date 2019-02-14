@@ -1,4 +1,4 @@
-package gridu.dsma.catalogservice.exceptions;
+package gridu.dsma.catalogservice.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

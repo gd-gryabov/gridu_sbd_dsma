@@ -1,4 +1,4 @@
-package gridu.dsma.catalogservice.entities;
+package gridu.dsma.catalogservice.entity;
 
 import lombok.Data;
 
@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "products")
+@Table(name = "catalog")
 public class Product {
     @Id
     private String id;
@@ -18,6 +18,9 @@ public class Product {
     private String sku;
 
     private String name;
+
+    @Column(length = 9216)
+    private String description;
 
     private double price;
 }

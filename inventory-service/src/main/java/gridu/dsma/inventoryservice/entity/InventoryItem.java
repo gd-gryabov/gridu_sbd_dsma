@@ -1,4 +1,4 @@
-package gridu.dsma.inventoryservice.entities;
+package gridu.dsma.inventoryservice.entity;
 
 import lombok.Data;
 
