@@ -49,3 +49,19 @@ services:
         while ! (nc -z config-server 8888 && nc -z service-registry 8761); do sleep 5; echo 'Waiting for service-registry and config-server services to start-up...'; done;
         java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8787,suspend=n -jar -Dspring.profiles.active=docker /app.jar
         "
+
+  product-service:
+      container_name: product-service
+      build: ./product-service
+      ports:
+        - "18383:8383"
+        - "39797:8787"
+      depends_on:
+        - config-server
+        - service-registry
+      entrypoint: /bin/sh
+      command: >
+        -c "
+        while ! (nc -z config-server 8888 && nc -z service-registry 8761); do sleep 5; echo 'Waiting for vault and config-server services to start-up...'; done;
+        java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8787,suspend=n -jar -Dspring.profiles.active=docker /app.jar
+        "
