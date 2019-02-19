@@ -1,11 +1,11 @@
 package gridu.dsma.productservice.client;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import gridu.dsma.productservice.model.CatalogResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -22,6 +22,7 @@ public class CatalogServiceClient {
 
     private static final String CATALOG_API_PATH = "http://catalog-service/catalog";
 
+    @HystrixCommand
     public Optional<CatalogResponse> getProductById(String id) {
         ResponseEntity<CatalogResponse> responseEntity =
             restTemplate.getForEntity(CATALOG_API_PATH + "/id/{id}", CatalogResponse.class, id);
@@ -33,6 +34,7 @@ public class CatalogServiceClient {
         return Optional.empty();
     }
 
+    @HystrixCommand
     public List<CatalogResponse> getProductsBySku(String sku) {
         ResponseEntity<List<CatalogResponse>> responseEntity =
             restTemplate.exchange(CATALOG_API_PATH + "/sku/{sku}",

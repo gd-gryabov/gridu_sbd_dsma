@@ -1,5 +1,6 @@
 package gridu.dsma.inventoryservice.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import gridu.dsma.inventoryservice.entity.InventoryItem;
 import gridu.dsma.inventoryservice.repository.InventoryItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ public class InventoryController {
     private final InventoryItemRepository inventoryItemRepository;
 
     @GetMapping("/{idList}")
+    @HystrixCommand
     public @ResponseBody
     Collection<InventoryItem> findInventoryByProductCode(@PathVariable List<String> idList) {
         log.info("Getting inventory info for ids={}", idList);

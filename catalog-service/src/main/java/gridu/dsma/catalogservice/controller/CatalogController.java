@@ -1,6 +1,7 @@
 package gridu.dsma.catalogservice.controller;
 
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import gridu.dsma.catalogservice.entity.Product;
 import gridu.dsma.catalogservice.exception.ProductNotFoundException;
 import gridu.dsma.catalogservice.service.CatalogService;
@@ -20,6 +21,7 @@ public class CatalogController {
     private final CatalogService catalogService;
 
     @GetMapping("/id/{id}")
+    @HystrixCommand
     public @ResponseBody Product productById(@PathVariable String id) {
         log.info("Return product with id={}", id);
         return catalogService.findProductById(id).orElseThrow(() ->
@@ -27,6 +29,7 @@ public class CatalogController {
     }
 
     @GetMapping("/sku/{sku}")
+    @HystrixCommand
     public @ResponseBody Collection<Product> productByCode(@PathVariable String sku) {
         log.info("Return product with sku={}", sku);
         return catalogService.findProductsBySku(sku);
